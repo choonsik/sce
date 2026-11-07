@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026 가을 산책 사진 콘테스트 | 행사 산출물 포털</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0c0d10;
+      --card-bg: rgba(26, 27, 32, 0.75);
+      --card-hover: rgba(35, 36, 44, 0.9);
+      --border: rgba(255, 255, 255, 0.1);
+      --border-accent: rgba(245, 158, 11, 0.4);
+      --text: #f4f4f6;
+      --text-muted: #9da1aa;
+      --accent: #f59e0b;
+      --accent-glow: rgba(245, 158, 11, 0.2);
+      --amber-gradient: linear-gradient(135deg, #f59e0b, #ef4444);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: var(--bg);
+      background-image: 
+        radial-gradient(circle at 20% 20%, rgba(245, 158, 11, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 80% 80%, rgba(239, 68, 68, 0.06) 0%, transparent 45%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 860px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: var(--accent);
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      margin-bottom: 16px;
+    }
+
+    .title {
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 12px;
+      background: linear-gradient(to right, #ffffff, #fef3c7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: all 0.25s ease;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--amber-gradient);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .card:hover {
+      background: var(--card-hover);
+      border-color: var(--border-accent);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), 0 0 24px var(--accent-glow);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-top {
+      margin-bottom: 24px;
+    }
+
+    .card-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .card-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      color: #d1d5db;
+    }
+
+    .card-action {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .card-action span {
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover .card-action span {
+      transform: translateX(4px);
+    }
+
+    .meta-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .meta-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .meta-items span strong {
+      color: #e5e7eb;
+    }
+
+    .back-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 12px;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--accent);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 12px;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header class="header">
+      <div class="badge">🍁 2026 SW역량강화팀 가을 산책 콘테스트</div>
+      <h1 class="title">"가장 멋진 가을 사진을 찍어라"</h1>
+      <p class="subtitle">
+        맑은 가을날의 소중한 순간들을 기록한 발표 자료와 프로젝트 분석 리포트입니다. 아래 산출물을 선택하여 열람하실 수 있습니다.
+      </p>
+    </header>
+
+    <div class="cards-grid">
+      <!-- 카드 1: 최종 발표자료 -->
+      <a href="가을_산책_사진_콘테스트_최종발표.html" class="card">
+        <div class="card-top">
+          <div class="card-icon">📽️</div>
+          <h2 class="card-title">
+            최종발표 & 심사 결과
+          </h2>
+          <p class="card-desc">
+            슬라이드 발표 모드와 스크롤 문서 듀얼 뷰어를 제공합니다. 47장의 출품작 타임라인 분석, 최종 대상 후보 TOP 4 쇼케이스 및 5인 페르소나 심사위원단의 종합 채점과 시상식을 확인하세요.
+          </p>
+          <div class="tags">
+            <span class="tag">슬라이드 모드</span>
+            <span class="tag">스크롤 문서</span>
+            <span class="tag">TOP 4 쇼케이스</span>
+            <span class="tag">5인 심사 매트릭스</span>
+            <span class="tag">🏆 대상 시상</span>
+          </div>
+        </div>
+        <div class="card-action">
+          <span>발표자료 열기</span>
+          <span>&rarr;</span>
+        </div>
+      </a>
+
+      <!-- 카드 2: 작업 히스토리 리포트 -->
+      <a href="작업_히스토리_리포트.html" class="card">
+        <div class="card-top">
+          <div class="card-icon">📑</div>
+          <h2 class="card-title">
+            작업 히스토리 리포트
+          </h2>
+          <p class="card-desc">
+            구글 포토 공유 앨범 데이터 전수 분석부터 시간대별 4단계 여정 분류, 페르소나 심사 평가 체계 구축, 프레젠테이션 산출물(PPTX·PDF·HTML) 제작 및 배포까지의 종합 기술 리포트입니다.
+          </p>
+          <div class="tags">
+            <span class="tag">Session Synthesis</span>
+            <span class="tag">데이터 파이프라인</span>
+            <span class="tag">코스 여정 4단계</span>
+            <span class="tag">피드백 체크리스트</span>
+          </div>
+        </div>
+        <div class="card-action">
+          <span>히스토리 리포트 열기</span>
+          <span>&rarr;</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="meta-box">
+      <div class="meta-items">
+        <span>📅 <strong>일시:</strong> 2026.11.05</span>
+        <span>📍 <strong>장소:</strong> 남산 및 호텔 하얏트</span>
+        <span>👥 <strong>주최:</strong> 2026 SW역량강화팀</span>
+      </div>
+      <a href="../index.html" class="back-link">&larr; SCE 메인으로</a>
+    </div>
+
+    <footer class="footer">
+      &copy; 2026 choonsik &middot; Hosted on GitHub Pages
+    </footer>
+  </div>
+
+</body>
+</html>
